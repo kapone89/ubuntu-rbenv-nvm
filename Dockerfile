@@ -45,7 +45,6 @@ ENV CONFIGURE_OPTS "--disable-install-doc"
 ENV PATH $RBENV_ROOT/shims:$RBENV_ROOT/bin:$PATH
 RUN git clone https://github.com/rbenv/rbenv.git ${RBENV_ROOT}
 RUN git clone https://github.com/rbenv/ruby-build.git ${RBENV_ROOT}/plugins/ruby-build
-RUN git clone https://github.com/jf/rbenv-gemset.git ${RBENV_ROOT}/plugins/rbenv-gemset
 RUN echo 'eval "$(rbenv init -)"' >> /root/.bashrc
 RUN source ~/.bashrc
 
@@ -59,19 +58,13 @@ ENV APP_HOME /app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
+COPY install_ruby /usr/local/bin/
+COPY install_node /usr/local/bin/
+
 ########### install project dependencies (SAMPLE) ###########
 
-# ENV RUBY_VERSION "2.4.2"
-# RUN rbenv install $RUBY_VERSION
-# RUN rbenv global $RUBY_VERSION
-# RUN gem install bundler
-# RUN rbenv rehash
-# ENV RBENV_GEMSETS "./.data/gems"
-#
-# ENV NODE_VERSION "8.12.0"
-# RUN source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION
-# ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-# RUN npm install -g yarn
+RUN install_ruby 2.4.2
+RUN install_node 8.12.0 yarn
 
 ############# build (SAMPLE) ##################
 

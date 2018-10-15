@@ -1,0 +1,6 @@
+#!/bin/bash
+
+NODE_VERSION=$1
+source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION
+echo "export PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:\$PATH" >> ~/.bashrc
+npm install -g "${@:2}"
