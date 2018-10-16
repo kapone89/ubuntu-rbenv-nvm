@@ -1,0 +1,11 @@
+version: '2'
+services:
+  devdocker-sample-1:
+    container_name: devdocker-sample-1
+    build:
+      context: .
+      dockerfile: SampleDockerfile
+    command: "tail -f /dev/null"
+    volumes:
+      - .:/app
+    network_mode: bridge

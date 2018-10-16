@@ -4,8 +4,11 @@ RUBY_VERSION=$1
 GLOBAL_GEMS_PATH=/root/gems
 LOCAL_GEMS_PATH=/app/.data/gems
 
-GEM_HOME=$GLOBAL_GEMS_PATH
-GEM_PATH=$GLOBAL_GEMS_PATH
+mkdir -p $GLOBAL_GEMS_PATH
+mkdir -p $LOCAL_GEMS_PATH
+
+export GEM_HOME=$GLOBAL_GEMS_PATH
+export GEM_PATH=$GLOBAL_GEMS_PATH
 
 rbenv install $RUBY_VERSION
 rbenv global $RUBY_VERSION
@@ -14,5 +17,5 @@ rbenv rehash
 
 echo "export GEM_HOME=$LOCAL_GEMS_PATH" >> ~/.bashrc
 echo "export GEM_PATH=$LOCAL_GEMS_PATH:$GLOBAL_GEMS_PATH" >> ~/.bashrc
-echo "export PATH=/app/.data/gems/bin:\$PATH" >> ~/.bashrc
+echo "export PATH=$GLOBAL_GEMS_PATH/bin:$LOCAL_GEMS_PATH/bin:\$PATH" >> ~/.bashrc
 source ~/.bashrc

@@ -63,8 +63,8 @@ COPY install_node /usr/local/bin/
 
 ########### install project dependencies (SAMPLE) ###########
 
-RUN install_ruby 2.4.2
-RUN install_node 8.12.0 yarn
+# RUN install_ruby 2.4.2
+# RUN install_node 8.12.0 yarn
 
 ############# build (SAMPLE) ##################
 
