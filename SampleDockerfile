@@ -1,4 +1,5 @@
 FROM ubuntu-rbenv-nvm
 
 RUN install_ruby 2.4.2
-RUN install_node 8.12.0 yarn
+RUN install_node 8.12.0
+RUN npm install -g yarn
