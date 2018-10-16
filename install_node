@@ -2,7 +2,8 @@
 
 NODE_VERSION=$1
 source $NVM_DIR/nvm.sh && nvm install $NODE_VERSION
+ln -sf $NVM_DIR/versions/node/v$NODE_VERSION/bin $NODE_BINS_PATH
 
 if [ ${@:2} ]; then
-  source $NVM_DIR/nvm.sh && npm install -g "${@:2}"
+  npm install -g "${@:2}"
 fi
