@@ -1,26 +1,12 @@
 #!/bin/bash
 
 RUBY_VERSION=$1
-GLOBAL_GEMS_PATH=/root/gems
-LOCAL_GEMS_PATH=/app/.data/gems
-
-mkdir -p $GLOBAL_GEMS_PATH
-mkdir -p $LOCAL_GEMS_PATH
-
-export GEM_HOME=$GLOBAL_GEMS_PATH
-export GEM_PATH=$GLOBAL_GEMS_PATH
-
 rbenv install $RUBY_VERSION
 rbenv global $RUBY_VERSION
-gem install bundler
+gem install --install-dir $GLOBAL_GEMS_PATH bundler
 
 if [ ${@:2} ]; then
-  gem install "${@:2}"
+  gem install --install-dir $GLOBAL_GEMS_PATH "${@:2}"
 fi
 
 rbenv rehash
-
-echo "export GEM_HOME=$LOCAL_GEMS_PATH" >> ~/.bashrc
-echo "export GEM_PATH=$LOCAL_GEMS_PATH:$GLOBAL_GEMS_PATH" >> ~/.bashrc
-echo "export PATH=$GLOBAL_GEMS_PATH/bin:$LOCAL_GEMS_PATH/bin:\$PATH" >> ~/.bashrc
-source ~/.bashrc

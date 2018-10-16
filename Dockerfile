@@ -58,6 +58,16 @@ ENV APP_HOME /app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
+ENV GLOBAL_GEMS_PATH /root/gems
+ENV LOCAL_GEMS_PATH /app/.data/gems
+
+RUN mkdir -p $GLOBAL_GEMS_PATH
+RUN mkdir -p $LOCAL_GEMS_PATH
+
+ENV GEM_HOME $LOCAL_GEMS_PATH
+ENV GEM_PATH $LOCAL_GEMS_PATH:$GLOBAL_GEMS_PATH
+ENV PATH $GLOBAL_GEMS_PATH/bin:$LOCAL_GEMS_PATH/bin:$PATH
+
 COPY install_ruby /usr/local/bin/
 COPY install_node /usr/local/bin/
 
