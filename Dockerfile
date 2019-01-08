@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libmemcached-dev \
   apt-utils \
   libssl1.0-dev \
+  socat \
   && rm -rf /var/lib/apt/lists/*
 
 # some tweaks
